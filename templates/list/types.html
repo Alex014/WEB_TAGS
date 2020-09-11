@@ -1,0 +1,23 @@
+{% extends "layout/base.html" %}
+{% block title %} Types of tags {% endblock %}
+{% block content %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/networks">Networks ({{ network }})</a></li>
+        <li class="breadcrumb-item" ><a href="/langs/{{ network_id|e }}">Languages ({{ lang }})</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <strong>
+            <a href="/types/{{ network_id|e }}/{{ lang_id|e }}">Types of tags</a>
+            </strong>
+        </li>
+      </ol>
+    </nav>
+
+    <center>
+        <hr>
+    {% for row in types %}
+        <a href="/tags/{{ network_id|e }}/{{ lang_id|e }}/{{ row['id']|e }}">{{ row['name']|e }} ({{ row['cnt'] }})</a>
+        <hr>
+    {% endfor %}
+    </center>
+{% endblock %}

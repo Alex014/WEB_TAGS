@@ -1,0 +1,13 @@
+{% extends "layout/base.html" %}
+{% block title %} ERROR ! {% endblock %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">ERROR !</h1>
+  <p class="lead">{{ error|e }}</p>
+  <hr class="my-4">
+  <p>Error code: {{ code|e }}</p>
+  <a class="btn btn-primary btn-lg" href="{{ backlink }}" role="button">Go back</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "layout/base.html" %}
+{% block title %} Blockchain info {% endblock %}
+{% block content %}
+    <h1>Blockchain info</h1>
+
+    <dl>
+    {% for key, value in data.items() %}
+        <dt>{{ key|e }}</dt>
+        <dd>{{ value|e }}</dd>
+    {% endfor %}
+    </dl>
+{% endblock %}

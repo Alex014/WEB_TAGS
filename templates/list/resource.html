@@ -1,0 +1,47 @@
+{% extends "layout/base.html" %}
+{% block title %} Networks {% endblock %}
+{% block content %}
+
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/networks">Networks ({{ network }})</a></li>
+        <li class="breadcrumb-item" ><a href="/langs/{{ network_id|e }}">Languages ({{ lang }})</a></li>
+        <li class="breadcrumb-item"><a href="/types/{{ network_id|e }}/{{ lang_id|e }}">Types of tags ({{ type }})</a></li>
+        <li class="breadcrumb-item"><a href="/tags/{{ network_id|e }}/{{ lang_id|e }}/{{ type_id|e }}">TAGS ({{ tag }})</a></li>
+        <li class="breadcrumb-item"><a href="/links/{{ network_id|e }}/{{ lang_id|e }}/{{ type_id|e }}/{{ tags_id|e }}">Links</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <strong>
+            <a href="/show/{{ network_id|e }}/{{ lang_id|e }}/{{ type_id|e }}/{{ tags_id|e }}/{{ resource_id|e }}">
+                This link
+                ({{ descriptions | length }} descriptions)
+            </a>
+            </strong>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="input-group col-md">
+      <div class="input-group-prepend">
+        <span class="input-group-text"><a href="{{ resource['url']|e }}" target="_blank">LINK</a></span>
+      </div>
+      <input type="text" value="{{ resource['url']|e }}" id="url-input" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-copy">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary copy" data-input="url-input" type="button" id="button-copy" >COPY</button>
+      </div>
+    </div>
+
+    <hr>
+    <strong>TAGS: </strong>
+    {% for row in tags %}
+        <a href="/links/{{ network_id|e }}/{{ lang_id|e }}/{{ type_id|e }}/{{ row['id']|e }}">{{ row['name']|e }} ({{ row['cnt'] }})</a>
+    {% endfor %}
+    <hr>
+        <h3>Descriptions:</h3>
+    <hr>
+    {% for row in descriptions %}
+        <blockquote style="white-space: pre-wrap;">{{ row['description']|e }}</blockquote>
+        <hr>
+    {% endfor %}
+    <a class="btn btn-success" href="/add/{{ resource_id|e }}"> + Add your description</a>
+{% endblock %}

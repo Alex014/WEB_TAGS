@@ -1,0 +1,34 @@
+{% extends "layout/base.html" %}
+{% block title %} Edit Record{% endblock %}
+{% block content %}
+
+<center><h3>Add Your Description for <a href="{{ resource['url']|e }}" target="_blank">{{ resource['url']|e }}</a></h3></center>
+
+<div class="row">
+  <div class="col-sm"></div>
+<div class="col-sm">
+
+<form method="post">
+  <input type="hidden" name="url" value="{{ resource['url']|e }}"/>
+  <div class="form-group">
+    <label for="days">Days to store</label>
+    <input type="number" class="form-control" id="days" name="days" value="1000" min="100" required aria-describedby="days_help">
+    <small id="days_help" class="form-text text-muted">Days to store record in blockchain (min 100 days)</small>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" name="description" rows="3" required aria-describedby="description_help"></textarea>
+    <small id="description_help" class="form-text text-muted">Long description of resource</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</div>
+
+  <div class="col-sm"></div>
+
+</div>
+
+<center><a href="/show/{{ resource['network_id']|e }}/{{ resource['lang_id']|e }}/{{ resource['type_id']|e }}/{{ tags_id|e }}/{{ resource['id']|e }}">[GO BACK]</a></center>
+
+{% endblock %}

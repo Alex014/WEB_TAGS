@@ -1,0 +1,22 @@
+{% extends "layout/base.html" %}
+{% block title %} Networks {% endblock %}
+{% block content %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/networks">Networks ({{ network }})</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <strong>
+            <a href="/langs/{{ network_id|e }}">Languages</a>
+            </strong>
+        </li>
+      </ol>
+    </nav>
+
+    <center>
+        <hr>
+    {% for row in langs %}
+        <a href="/types/{{ network_id|e }}/{{ row['id']|e }}" class="display-4">{{ row['name']|e }} ({{ row['cnt'] }})</a>
+        <hr>
+    {% endfor %}
+    </center>
+{% endblock %}

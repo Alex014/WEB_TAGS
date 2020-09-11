@@ -1,0 +1,35 @@
+{% extends "layout/base.html" %}
+{% block title %} My Tags {% endblock %}
+{% block content %}
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">URL</th>
+      <th scope="col">Description</th>
+      <th scope="col" class="text-center">Expires IN days</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in records: %}
+        {% if record['decoded']['description']: %}
+    <tr>
+      <td class="text-center">
+          <a href="{{ record['decoded']['url']|e }}">{{ record['decoded']['url']|e }}</a>
+      </td>
+      <td>
+          <a href="/my/show/{{ record['name']|e }}" style="white-space: pre-wrap;">{{ record['decoded']['description']|e }}</a>
+      </td>
+      <td class="text-center">{{ record['expires_in'] }}</td>
+      <td class="text-right">
+          <a href="/my_descriptions/edit/{{ record['name']|e }}">EDIT</a>
+          <a href="#" class="delink" data-url="/my/delete/{{ record['name']|e }}">DELETE</a>
+      </td>
+    </tr>
+        {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

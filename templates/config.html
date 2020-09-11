@@ -1,0 +1,44 @@
+{% extends "layout/base.html" %}
+{% block title %} Edit Record{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-sm"></div>
+<div class="col-sm">
+
+  <center><h3>RPC connection configuration</h3></center>
+
+<form method="post">
+  <div class="form-group">
+    <label for="host">HOST</label>
+    <input type="text" class="form-control" id="host" name="host" required value="{{ data['host']|e }}">
+  </div>
+  <div class="form-group">
+    <label for="port">PORT</label>
+    <input type="number" class="form-control" id="port" name="port" required value="{{ data['port']|e }}">
+  </div>
+  <div class="form-group">
+    <label for="user">USER</label>
+    <input type="text" class="form-control" id="user" name="user" required value="{{ data['user']|e }}">
+  </div>
+  <div class="form-group">
+    <label for="password">PASSWORD</label>
+    <input type="text" class="form-control" id="password" name="password" required value="{{ data['password']|e }}">
+  </div>
+  <blockquote>Add folowing params to your <b>~/.emercoin/emercoin.conf</b> file in Linux <b>%APPDATA%\emercoin\emercoin.conf</b> file in Windows</blockquote>
+  <code style="white-space: pre-wrap;">
+rpcuser=USER
+rpcpassword=PASSWORD
+rpcallowip=localhost
+rpcport=PORT
+  </code>
+  <br/>
+  <button type="submit" class="btn btn-primary">SAVE {% if result: %} {{result}} {% endif %}</button>
+</form>
+
+</div>
+
+  <div class="col-sm"></div>
+
+</div>
+
+{% endblock %}

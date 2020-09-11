@@ -1,0 +1,35 @@
+{% extends "layout/base.html" %}
+{% block title %} Tags {% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md"></div>
+    <div class="col-md">
+        <form method="post">
+          <div class="form-group row">
+            <input name="search" type="text" class="form-control" value="{{search|e}}" placeholder="Type to search ...">
+          </div>
+          <div class="form-group row">
+              <div class="col-sm-6">
+                <label><strong>Search by</strong></label>
+              </div>
+              <div class="col-sm-6 text-right">
+                <label for="description" style="cursor: pointer;">Description</label>
+                <input type="radio" name="type" value="description" id="description" style="cursor: pointer;" {% if type == 'description' %}checked="checked"{% endif %}>
+                <label for="url" style="cursor: pointer;">URL</label>
+                <input type="radio" name="type" value="url" id="url" style="cursor: pointer;" {% if type == 'url' %}checked="checked"{% endif %}>
+              </div>
+          </div>
+          <div class="form-group row">
+          <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </form>
+    </div>
+    <div class="col-md"></div>
+</div>
+
+    {% for row in resources %}
+        <a href="/show/{{ row['network_id']|e }}/{{ row['lang_id']|e }}/{{ row['type_id']|e }}/{{ row['tags_id']|e }}/{{ row['id']|e }}" target="_blank" style="white-space: pre-wrap;">{{ row['description']|e }} ({{ row['cnt'] }})</a>
+        <hr>
+    {% endfor %}
+{% endblock %}

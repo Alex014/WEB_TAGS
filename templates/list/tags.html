@@ -1,0 +1,24 @@
+{% extends "layout/base.html" %}
+{% block title %} Tags {% endblock %}
+{% block content %}
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/networks">Networks ({{ network }})</a></li>
+        <li class="breadcrumb-item" ><a href="/langs/{{ network_id|e }}">Languages ({{ lang }})</a></li>
+        <li class="breadcrumb-item"><a href="/types/{{ network_id|e }}/{{ lang_id|e }}">Types of tags ({{ type }})</a></li>
+        <li class="breadcrumb-item active" aria-current="page">
+            <strong>
+            <a href="/tags/{{ network_id|e }}/{{ lang_id|e }}/{{ type_id|e }}">TAGS</a>
+            </strong>
+        </li>
+      </ol>
+    </nav>
+
+    <div class="row">
+    {% for row in tags %}
+        <div class="col-md">
+        <a href="/links/{{ network_id|e }}/{{ lang_id|e }}/{{ type_id|e }}/{{ row['id']|e }}">{{ row['name']|e }} ({{ row['cnt'] }})</a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

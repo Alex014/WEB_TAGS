@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap.css">
+
+    <title>WEB TAGS - {% block title %}{% endblock %}</title>
+  </head>
+
+  <body>
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-xl">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">WEB TAGS</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if nav == 'tags': %}active{% endif %}" href="/networks">Links</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if nav == 'search': %}active{% endif %}" href="/search">Search</a>
+          </li>
+          <li class="nav-item {% if nav == 'my': %}active{% endif %}">
+            <a class="nav-link" href="/my">My Links</a>
+          </li>
+          <li class="nav-item {% if nav == 'my_descriptions': %}active{% endif %}">
+            <a class="nav-link" href="/my_descriptions">My Descriptions</a>
+          </li>
+          <li class="nav-item {% if nav == 'submit': %}active{% endif %}">
+            <a class="nav-link" href="/submit">Submit Link</a>
+          </li>
+          <li class="nav-item {% if nav == 'config': %}active{% endif %}">
+            <a class="nav-link" href="/config">Config</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link sync" data-link="/sync" href="#">Sync</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+        </div>
+      </div>
+    </div>
+
+    <script src="/jquery.js"></script>
+    <script src="/bootstrap.js"></script>
+
+    <script type="text/javascript">
+      function fallbackCopyTextToClipboard(text) {
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+
+        // Avoid scrolling to bottom
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          var msg = successful ? 'successful' : 'unsuccessful';
+          console.log('Fallback: Copying text command was ' + msg);
+        } catch (err) {
+          console.error('Fallback: Oops, unable to copy', err);
+        }
+
+        document.body.removeChild(textArea);
+      }
+
+      function copyTextToClipboard(text) {
+        if (!navigator.clipboard) {
+          fallbackCopyTextToClipboard(text);
+          return;
+        }
+        navigator.clipboard.writeText(text).then(function() {
+          console.log('Async: Copying to clipboard was successful!');
+        }, function(err) {
+          console.error('Async: Could not copy text: ', err);
+        });
+      }
+
+
+    $(document).ready(function() {
+        $('.delink').click(function() {
+            if(confirm('Confirm delete ?'))
+              window.location = $(this).data('url')
+        })
+
+        $('.sync').click(function() {
+          if(confirm('Database will be reloaded')) {
+            url = $(this).data('link')
+            $.get(url, function(result) {
+              if(result.trim() == 'ok')
+                window.location = '/networks'
+            })
+           }
+        })
+
+        $('.copy').click(function() {
+          var copy_value = $('#'+$(this).data('input')).val()
+          copyTextToClipboard(copy_value)
+        })
+    })
+    </script>
+  </body>
+</html>

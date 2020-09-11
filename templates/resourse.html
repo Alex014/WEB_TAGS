@@ -1,0 +1,25 @@
+{% extends "layout/base.html" %}
+{% block title %} {{ resourse.title }} {% endblock %}
+{% block content %}
+<h1>Resourse data</h1>
+
+    <table>
+        <tr><th>URL</th><td><a href="{{ resourse['decoded']['url']|e}}">{{ resourse['decoded']['url']|e}}</a></td></tr>
+        <tr><th>Network</th><td>{{ resourse['decoded']['network']|e}}</td></tr>
+        <tr><th>Type</th><td>{{ resourse['decoded']['type']|e}}</td></tr>
+        <tr><th>Lang</th><td>{{ resourse['decoded']['lang']|e}}</td></tr>
+        <tr><th>Tags</th><td>{{ resourse['decoded']['tags']|e}}</td></tr>
+        <tr><th>Description</th><td>{{ resourse['decoded']['description']|e}}</td></tr>
+    </table>
+
+<h1>Debug info</h1>
+
+    <dl>
+    {% for key, value in resourse.items() %}
+        {% if key != 'decoded' %}
+        <dt>{{ key|e }}</dt>
+        <dd>{{ value|e }}</dd>
+        {% endif %}
+    {% endfor %}
+    </dl>
+{% endblock %}

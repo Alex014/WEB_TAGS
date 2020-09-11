@@ -1,0 +1,33 @@
+{% extends "layout/base.html" %}
+{% block title %} Edit Record{% endblock %}
+{% block content %}
+<div class="row">
+  <div class="col-sm"></div>
+<div class="col-sm">
+
+<form method="post">
+  <div class="form-group">
+    <label for="days"> + Days to store</label>
+    <input type="number" class="form-control" id="days" name="days" value="1" min="1" required aria-describedby="days_help">
+    <small id="days_help" class="form-text text-muted">Days to store record in blockchain (min 100 days)</small>
+  </div>
+  <div class="form-group">
+    <label for="url">URL</label>
+    <input type="url" class="form-control" id="url" name="url" value="{{ resourse['url']|e }}" required aria-describedby="url_help">
+    <small id="url_help" class="form-text text-muted">URL of resource (HTTP,FTP,TORRENT)</small>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea class="form-control" id="description" name="description" rows="3" required aria-describedby="description_help">{{ resourse['description']|e }}</textarea>
+    <small id="description_help" class="form-text text-muted">Long description of resource</small>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+</div>
+
+  <div class="col-sm"></div>
+
+</div>
+
+{% endblock %}

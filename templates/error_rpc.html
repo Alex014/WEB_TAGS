@@ -1,0 +1,13 @@
+{% extends "layout/base.html" %}
+{% block title %} ERROR ! {% endblock %}
+{% block content %}
+
+<div class="jumbotron">
+  <h1 class="display-4">RPC error !</h1>
+  <p class="lead">Can not connect to EMERCOIN wallet.</p>
+  <hr class="my-4">
+  <p>Check that 1) connection params (host, port, user, password) are correct 2) EMERCOIN wallet is unlocked for reading/writing</p>
+  <a class="btn btn-primary btn-lg" href="/config" role="button">Go to config page</a>
+</div>
+
+{% endblock %}
